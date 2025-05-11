@@ -1,0 +1,36 @@
+services:
+  backend:
+    # Servicio de django
+    image: backend-django # Nombre de la imagen
+    build:
+      # Construye la imagen
+      context: ./config/django-image # Busca el Dockerfile dentro de esta ruta
+    volumes:
+      - ./src/django:/usr/src/app
+    environment:
+      DB_HOST: ${DB_HOST}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      DJANGO_SU_NAME: ${DJANGO_SU_NAME}
+      DJANGO_SU_EMAIL: ${DJANGO_SU_EMAIL}
+      DJANGO_SU_PASSW: ${DJANGO_SU_PASSWD}
+    ports:
+      - 8000:8000
+    networks:
+      - red
+
+  postgres:
+    image: postgres:16-bullseye
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    ports:
+      - ${DB_PORT}:5432
+    networks:
+      red:
+networks:
+  red:
