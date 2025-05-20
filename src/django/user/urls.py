@@ -1,7 +1,11 @@
 from django.urls import path
+from rest_framework.routers import DefaultRouter
 from .views import RegisterView
 from .views import UserProfileView
 from rest_framework_simplejwt.views import TokenObtainPairView
+
+router = DefaultRouter()
+router.register(r"profile", UserProfileView, basename="user_profile")
 
 
 urlpatterns = [
@@ -9,5 +13,6 @@ urlpatterns = [
     path(
         "login/", TokenObtainPairView.as_view(), name="login"
     ),  # Create acces_token and refresh_token
-    path("profile/", UserProfileView.as_view(), name="user_profile"),  # User profile
 ]
+
+urlpatterns += router.urls
