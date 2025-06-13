@@ -14,13 +14,11 @@ from .serializers import (
 class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
-    permissions_classes = [permissions.IsAuthenticated]
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
-    permissions_classes = [permissions.IsAuthenticated]
 
 
 class QuestionViewSet(viewsets.ModelViewSet):

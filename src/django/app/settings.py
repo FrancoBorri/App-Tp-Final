@@ -27,6 +27,9 @@ SECRET_KEY = "django-insecure-fz6-#fc!!p77vx0)ksn3ar^b&*$nz7%-v6o@*pf*vwxpt&d0eq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+CORS_ALLOW_ALL_ORIGINS = True
+
+
 ALLOWED_HOSTS = []
 
 REST_FRAMEWORK = {
@@ -41,6 +44,7 @@ SIMPLE_JWT = {
 }
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -51,12 +55,14 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework_simplejwt",
-    "user",
+    "corsheaders",
+    "user.apps.UserConfig",
     "product",
     "order"
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -64,6 +70,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = "app.urls"

@@ -6,3 +6,4 @@ djangorestframework-simplejwt
 python-dotenv # Variables de entorno
 black
 pillow # Manejo de imagenes
+django-cors-headers

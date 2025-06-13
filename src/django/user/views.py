@@ -1,6 +1,6 @@
-from django.shortcuts import render
 
 # Create your views here.
+from django.contrib.auth import authenticate, login
 from rest_framework import status
 from .models import User_profile
 from .serializers import RegisterSerializer
@@ -51,3 +51,5 @@ class RegisterView(APIView):
             },
             status=status.HTTP_400_BAD_REQUEST,
         )
+
+

@@ -5,8 +5,8 @@ from .models import User_profile
 
 User = get_user_model()  # User default model django
 
-
 class UserProfileSerializer(serializers.ModelSerializer):
+
     """
     Serializer for user profile.
     """
@@ -20,31 +20,31 @@ class UserProfileSerializer(serializers.ModelSerializer):
             "picture_profile": {"required": False},
         }
 
-        def validate_address(self, value):
-            """
-            Validate that the address is not empty.
-            """
-            if not value:
-                raise serializers.ValidationError("Address cannot be empty.")
-            return value
+    def validate_address(self, value):
+        """
+        Validate that the address is not empty.
+        """
+        if not value:
+            raise serializers.ValidationError("Address cannot be empty.")
+        return value
 
-        def create(self, validated_data):
-            """
-            Create a new user profile with the provided validated data.
-            """
-            return User_profile.objects.create(**validated_data)
+    def create(self, validated_data):
+        """
+        Create a new user profile with the provided validated data.
+        """
+        return User_profile.objects.create(**validated_data)
 
-        def update(self, instance, validated_data):
-            """
-            Update the user profile with the provided validated data.
-            """
-            instance.address = validated_data.get("address", instance.address)
-            instance.phone = validated_data.get("phone", instance.phone)
-            instance.picture_profile = validated_data.get(
-                "picture_profile", instance.picture_profile
-            )
-            instance.save()
-            return instance
+    def update(self, instance, validated_data):
+        """
+        Update the user profile with the provided validated data.
+        """
+        instance.address = validated_data.get("address", instance.address)
+        instance.phone = validated_data.get("phone", instance.phone)
+        instance.picture_profile = validated_data.get(
+            "picture_profile", instance.picture_profile
+        )
+        instance.save()
+        return instance
 
 
 class RegisterSerializer(serializers.ModelSerializer):
